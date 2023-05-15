@@ -18,7 +18,6 @@ def phone(request):
         form = PhoneForm(request.POST)
         if form.is_valid():
             form.save()
-            # cleaned_phone = form.cleaned_data['phone']
             send_phone.delay()
             return HttpResponseRedirect(reverse("sms"))
         return render(request, 'phone.html', {'form': form})
